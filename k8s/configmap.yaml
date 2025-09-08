@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: discord-bot-config
+  namespace: discord-bot
+data:
+  NODE_ENV: "production"
+  N8N_TEST_API: "http://n8n.n8n.svc.cluster.local:5678/webhook-test/7f90db0d-59ca-4915-9d88-86257131cf64"
+  N8N_PRODUCTION_API: "http://n8n.n8n.svc.cluster.local:5678/webhook/7f90db0d-59ca-4915-9d88-86257131cf64"
