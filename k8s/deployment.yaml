@@ -19,10 +19,16 @@ spec:
       annotations:
         consul.hashicorp.com/connect-inject: "false"  # ปิด Consul injection
     spec:
+      dnsPolicy: ClusterFirst
       dnsConfig:
         options:
         - name: ndots
-          value: "1"    
+          value: "2"
+        - name: edns0
+        searches:
+        - registry.svc.cluster.local
+        - svc.cluster.local
+        - cluster.local
       containers:
       - name: discord-bot
         image: registry.registry.svc.cluster.local:5000/discord-bot:latest  # แทนที่ด้วย image ของคุณ
