@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: discord-bot
-        image: your-registry/discord-bot:latest  # แทนที่ด้วย image ของคุณ
+        image: registry.registry.svc.cluster.local:5000/discord-bot:latest  # แทนที่ด้วย image ของคุณ
         imagePullPolicy: Always
         env:
         # จาก Secret
