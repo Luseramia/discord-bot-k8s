@@ -81,7 +81,7 @@ spec:
         #     port: 3000
         #   initialDelaySeconds: 5
         #   periodSeconds: 10
-      restartPolicy: imagePullSecrets
+      # restartPolicy: imagePullSecrets
       # หรือใช้ imagePullSecrets ถ้าใช้ private registry
-      # imagePullSecrets:
-      # - name: regcred
+      imagePullSecrets:
+      - name: regcred
