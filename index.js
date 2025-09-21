@@ -70,7 +70,7 @@ client.on("interactionCreate", async (interaction) => {
       note
     );
     if (result.message === "Workflow was started") {
-      await interaction.reply(`รัน workflow เรียบร้อย`);
+      await interaction.reply(`รัน workflow เรียบร้อย`,productionApi);
     } else {
       await interaction.reply(`เกิดข้อผิดพลาด ${result}`);
     }
