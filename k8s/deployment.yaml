@@ -23,7 +23,7 @@ spec:
       containers:
       - name: discord-bot
         image: registry.registry.svc.cluster.local:5000/discord-bot:latest  # แทนที่ด้วย image ของคุณ
-        imagePullPolicy: IfNotPresent
+        imagePullPolicy: Always
         env:
         # จาก Secret
         - name: DISCORD_TOKEN
