@@ -8,6 +8,14 @@ const productionApi =
   process.env.N8N_PRODUCTION_API ||
   "http://192.168.1.53:5678/webhook/02bb3007-efbd-414c-8e6c-2cf2718ce984";
 
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
+});
+
 process.on("SIGTERM", () => {
   console.log("SIGTERM received, shutting down gracefully");
   client.destroy();
@@ -27,14 +35,6 @@ process.on("SIGINT", () => {
   console.log("SIGINT received, shutting down gracefully");
   client.destroy();
   process.exit(0);
-});
-
-const client = new Client({
-  intents: [
-    GatewayIntentBits.Guilds,
-    GatewayIntentBits.GuildMessages,
-    GatewayIntentBits.MessageContent,
-  ],
 });
 
 client.on("ready", () => {
