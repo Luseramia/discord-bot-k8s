@@ -50,6 +50,7 @@ client.on("messageCreate", async (message) => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
+  await interaction.reply(productionApi);
   if (interaction.commandName === "ping") {
     interaction.reply("Pong!");
   }
@@ -70,7 +71,7 @@ client.on("interactionCreate", async (interaction) => {
       note
     );
     if (result.message === "Workflow was started") {
-      await interaction.reply(`รัน workflow เรียบร้อย`,productionApi);
+      await interaction.reply(`รัน workflow เรียบร้อย`);
     } else {
       await interaction.reply(`เกิดข้อผิดพลาด ${result}`);
     }
