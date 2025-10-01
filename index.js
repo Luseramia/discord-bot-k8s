@@ -71,6 +71,8 @@ client.on("interactionCreate", async (interaction) => {
       expenseDiscription,
       note
     );
+    console.log('api',productionApi);
+    
 
     if (result.message === "Workflow was started") {
       await interaction.editReply(`รัน workflow เรียบร้อย`);
