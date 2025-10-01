@@ -86,39 +86,42 @@ client.on("interactionCreate", async (interaction) => {
 // const testApi = 'http://192.168.1.53:5678/webhook-test/02bb3007-efbd-414c-8e6c-2cf2718ce984'
 // const productionApi =  'http://192.168.1.53:5678/webhook/02bb3007-efbd-414c-8e6c-2cf2718ce984'
 
-async function onCreateExpenses(
-  username,
-  typeOfExpense,
-  amount,
-  expenseDiscription,
-  note
-) {
-  const res = await fetch(productionApi, {
-    method: "POST", // หรือ GET ตามที่ workflow รอรับ
-    headers: {
-      "Content-Type": "application/json",
-      "x-AUTH": "MTI5OTk0OTgxOTE0MTU1NDE5Nw", // header ที่คุณอยากส่ง
-    },
-    body: JSON.stringify({
-      username,
-      typeOfExpense,
-      amount,
-      date: new Date(),
-      expenseDiscription,
-      note,
-    }),
-  })
-    .then((res) => res.json())
-    .then((data) => {
-      return data;
-      // console.log("Response:", data);
-    })
-    .catch((err) => {
-      return err;
-      // console.error("Error:", err);
+async function onCreateExpenses(username, typeOfExpense, amount, expenseDiscription, note) {
+  try {
+    const res = await fetch(productionApi, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "x-AUTH": "MTI5OTk0OTgxOTE0MTU1NDE5Nw",
+      },
+      body: JSON.stringify({
+        username,
+        typeOfExpense,
+        amount,
+        date: new Date(),
+        expenseDiscription,
+        note,
+      }),
     });
-  return res;
+
+    console.log("Status:", res.status);
+    console.log("Headers:", Object.fromEntries(res.headers.entries()));
+
+    const text = await res.text();
+    console.log("Raw response:", text);
+
+    // ถ้าเป็น JSON ค่อย parse
+    if (res.headers.get("content-type")?.includes("application/json")) {
+      return JSON.parse(text);
+    } else {
+      return { error: "Not JSON", raw: text };
+    }
+  } catch (err) {
+    console.error("Fetch error:", err);
+    return { error: err.message };
+  }
 }
+
 
 // 7. ล็อกอินบอท
 client.login(DISCORD_TOKEN);
