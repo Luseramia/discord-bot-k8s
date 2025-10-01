@@ -50,17 +50,18 @@ client.on("messageCreate", async (message) => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-  // await interaction.reply(productionApi);
+
   if (interaction.commandName === "ping") {
-    interaction.reply("Pong!");
+    return interaction.reply("Pong!");
   }
+
   if (interaction.commandName === "รายจ่าย") {
+    await interaction.deferReply(); // ⬅️ บอก Discord ว่าจะตอบทีหลัง
+
     const username = interaction.user.username;
     const typeOfExpense = interaction.options.getString("ประเภท");
     const amount = interaction.options.getInteger("จำนวน");
-    const expenseDiscription = interaction.options.getString(
-      "รายละเอียดค่าใช้จ่าย"
-    );
+    const expenseDiscription = interaction.options.getString("รายละเอียดค่าใช้จ่าย");
     const note = interaction.options.getString("โน๊ต");
 
     const result = await onCreateExpenses(
@@ -70,10 +71,11 @@ client.on("interactionCreate", async (interaction) => {
       expenseDiscription,
       note
     );
+
     if (result.message === "Workflow was started") {
-      await interaction.reply(`รัน workflow เรียบร้อย`);
+      await interaction.editReply(`รัน workflow เรียบร้อย`);
     } else {
-      await interaction.reply(`เกิดข้อผิดพลาด ${result}`);
+      await interaction.editReply(`เกิดข้อผิดพลาด ${result}`);
     }
     console.log(result);
   }
