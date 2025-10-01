@@ -103,7 +103,6 @@ async function onCreateExpenses(username, typeOfExpense, amount, expenseDiscript
         note,
       }),
     });
-
     console.log("Status:", res.status);
     console.log("Headers:", Object.fromEntries(res.headers.entries()));
 
