@@ -5,5 +5,5 @@ metadata:
   namespace: discord-bot
 data:
   NODE_ENV: "production"
-  N8N_TEST_API: "https://n8n.tarchunk.win/webhook-test/2e540deb-3f14-4879-ad51-dd3bd1df2a96"
-  N8N_PRODUCTION_API: "https://n8n.tarchunk.win/webhook/2e540deb-3f14-4879-ad51-dd3bd1df2a96"
+  N8N_TEST_API: "https://n8n.tarchunk.win/webhook-test/d3b132c4-8380-4b0d-96a6-ea11d2f040a9"
+  N8N_PRODUCTION_API: "https://n8n.tarchunk.win/webhook/d3b132c4-8380-4b0d-96a6-ea11d2f040a9"
