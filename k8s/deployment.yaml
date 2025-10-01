@@ -22,7 +22,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: discord-bot
-        image: registry.registry.svc.cluster.local:5000/discord-bot:latest  # แทนที่ด้วย image ของคุณ
+        image: registry.registry.svc.cluster.local:5000/discord-bot:25
         imagePullPolicy: Always
         env:
         # จาก Secret
