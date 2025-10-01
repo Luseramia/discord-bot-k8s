@@ -50,7 +50,7 @@ client.on("messageCreate", async (message) => {
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isChatInputCommand()) return;
-  await interaction.reply(productionApi);
+  // await interaction.reply(productionApi);
   if (interaction.commandName === "ping") {
     interaction.reply("Pong!");
   }
