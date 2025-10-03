@@ -7,6 +7,7 @@ metadata:
     app: discord-bot
 spec:
   replicas: 1  # Discord bot ควรมี replica เดียวเพื่อป้องกัน duplicate messages
+  revisionHistoryLimit: 2
   strategy:
     type: Recreate  # ป้องกัน multiple instances ทำงานพร้อมกัน
   selector:
