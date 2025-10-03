@@ -23,7 +23,7 @@ spec:
       dnsPolicy: ClusterFirst
       containers:
       - name: discord-bot
-        image: registry.registry.svc.cluster.local:5000/discord-bot:33
+        image: registry.registry.svc.cluster.local:5000/discord-bot:40
         imagePullPolicy: Always
         env:
         # จาก Secret
