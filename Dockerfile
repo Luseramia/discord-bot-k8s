@@ -10,6 +10,8 @@ COPY package*.json ./
 # ติดตั้ง dependencies
 RUN npm install --production
 
+
+RUN apk add --no-cache curl
 # คัดลอก source code ทั้งหมดเข้ามาใน container
 COPY . .
 
