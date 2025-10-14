@@ -20,6 +20,7 @@ spec:
       annotations:
         consul.hashicorp.com/connect-inject: "false"  # ปิด Consul injection
     spec:
+      serviceAccountName: discordbot
       dnsPolicy: ClusterFirst
       containers:
       - name: discord-bot
