@@ -71,15 +71,14 @@ client.on("interactionCreate", async (interaction) => {
       expenseDiscription,
       note
     );
-    console.log('api',productionApi);
-    
+  console.log('test change');
+        
 
     if (result.message === "Workflow was started") {
       await interaction.editReply(`รัน workflow เรียบร้อย`);
     } else {
       await interaction.editReply(`เกิดข้อผิดพลาด ${result}`);
     }
-    console.log(result);
   }
 });
 
