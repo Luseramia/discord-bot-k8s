@@ -3,6 +3,9 @@ kind: Deployment
 metadata:
   name: discord-bot
   namespace: discord-bot
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: discord-bot=registry.registry.svc.cluster.local:5000/discord-bot
+    argocd-image-updater.argoproj.io/discord-bot.update-strategy: latest
   labels:
     app: discord-bot
 spec:
