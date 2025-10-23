@@ -20,6 +20,7 @@ spec:
       annotations:
         consul.hashicorp.com/connect-inject: "false"  # ปิด Consul injection
         vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-token: "true"
         vault.hashicorp.com/role: "discordbot"
         vault.hashicorp.com/agent-inject-secret-config: "dev-secrets/data/creds"
         vault.hashicorp.com/agent-inject-template-config: |
