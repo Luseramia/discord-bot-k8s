@@ -46,15 +46,27 @@ const commands = [
         type: 4, // INTEGER
         required: true,
       },
-        {
+      {
         name: "รายละเอียดค่าใช้จ่าย",
         description: "ระบุสิ่งของแบบชัดเจน",
         type: 3, // STRING
       },
-       {
+      {
         name: "โน๊ต",
         description: "เพิ่มโน๊ต",
         type: 3, // STRING
+      },
+    ],
+  },
+  {
+    name: "ตอบกลับchat",
+    description: "ส่งข้อความไปที่ chat ws",
+    options: [
+      {
+        name: "ข้อความ",
+        description: "ข้อความที่ต้องการส่ง",
+        type: 3, // STRING
+        required: true,
       },
     ],
   },
