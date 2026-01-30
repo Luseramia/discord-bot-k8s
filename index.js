@@ -87,7 +87,7 @@ client.on("interactionCreate", async (interaction) => {
     const chatMessage = interaction.options.getString("ข้อความ");
     const username = interaction.user.username;
 
-    const ws = new WebSocket("ws://localhost:3000/ws/chat");
+    const ws = new WebSocket("ws://sso-bun-service.infra.svc.cluster.local:3000/ws/chat");
 
     ws.on("open", () => {
       const payload = {
