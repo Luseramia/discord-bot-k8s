@@ -5,3 +5,4 @@ node_modules
 pipeline
 k8s/secret.yaml
 google.json
+k8s/secret.yaml
