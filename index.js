@@ -109,7 +109,7 @@ client.on("interactionCreate", async (interaction) => {
 
       if (res.ok && data.success) {
         await interaction.editReply(
-          `✅ ส่งคอมเม้นของ **${issueKey}** เข้า channel นี้แล้ว (${data.commentCount} รายการ)`
+          `✅ กำลังส่งคอมเม้นของ **${issueKey}** เข้า channel นี้... (รูปจะทยอยมา)`
         );
       } else {
         await interaction.editReply(
