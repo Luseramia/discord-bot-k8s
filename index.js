@@ -8,6 +8,9 @@ const testApi =
 const productionApi =
   process.env.N8N_PRODUCTION_API ||
   "http://192.168.1.53:5678/webhook/02bb3007-efbd-414c-8e6c-2cf2718ce984";
+const jiraCommentsApi =
+  process.env.N8N_JIRA_COMMENTS_API ||
+  "https://n8n.tarchunk.win/webhook/jira-comments";
 
 const client = new Client({
   intents: [
@@ -80,6 +83,44 @@ client.on("interactionCreate", async (interaction) => {
     } else {
       await interaction.editReply(`เกิดข้อผิดพลาด ${result}`);
     }
+  }
+
+  if (interaction.commandName === "jira-comments") {
+    await interaction.deferReply({ ephemeral: true });
+    const issueKey = interaction.options.getString("issue");
+
+    try {
+      const res = await fetch(jiraCommentsApi, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          issueKey,
+          channelId: interaction.channelId,
+        }),
+      });
+
+      const text = await res.text();
+      let data = {};
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { raw: text };
+      }
+
+      if (res.ok && data.success) {
+        await interaction.editReply(
+          `✅ ส่งคอมเม้นของ **${issueKey}** เข้า channel นี้แล้ว (${data.commentCount} รายการ)`
+        );
+      } else {
+        await interaction.editReply(
+          `❌ ดึงคอมเม้น **${issueKey}** ไม่สำเร็จ: ${data.error || `HTTP ${res.status}`}`
+        );
+      }
+    } catch (err) {
+      console.error("jira-comments error:", err);
+      await interaction.editReply(`❌ เกิดข้อผิดพลาด: ${err.message}`);
+    }
+    return;
   }
 
   if (interaction.commandName === "ตอบกลับchat") {

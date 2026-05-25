@@ -70,6 +70,18 @@ const commands = [
       },
     ],
   },
+  {
+    name: "jira-comments",
+    description: "ดูคอมเม้นของ Jira issue",
+    options: [
+      {
+        name: "issue",
+        description: "Issue key เช่น PROJ-123",
+        type: 3, // STRING
+        required: true,
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);
