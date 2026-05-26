@@ -82,6 +82,41 @@ const commands = [
       },
     ],
   },
+  {
+    name: "jira-status",
+    description: "ดู Jira issues ที่อยู่ใน status ที่ต้องการ",
+    options: [
+      {
+        name: "status",
+        description: "เลือก status",
+        type: 3, // STRING
+        required: true,
+        choices: [
+          { name: "PENDING", value: "PENDING" },
+          { name: "TO DO", value: "To Do" },
+          { name: "IN PROGRESS", value: "In Progress" },
+          { name: "TEST", value: "TEST" },
+          { name: "TESTING", value: "TESTING" },
+          { name: "TESTING ACC", value: "TESTING ACC" },
+          { name: "UAT", value: "UAT" },
+          { name: "UAT FAIL", value: "UAT FAIL" },
+          { name: "READY TO DEPLOY", value: "READY TO DEPLOY" },
+          { name: "CR REJECT", value: "CR REJECT" },
+          { name: "DEPLOYED", value: "DEPLOYED" },
+          { name: "REPOST", value: "REPOST" },
+          { name: "REPOST FAIL", value: "REPOST FAIL" },
+          { name: "SMOKE TEST", value: "SMOKE TEST" },
+          { name: "SMOKE TEST FAIL", value: "SMOKE TEST FAIL" },
+          { name: "CLOSED", value: "CLOSED" },
+        ],
+      },
+      {
+        name: "project",
+        description: "(เลือกได้) จำกัด project key เช่น SE",
+        type: 3, // STRING
+      },
+    ],
+  },
 ];
 
 const rest = new REST({ version: "10" }).setToken(process.env.TOKEN);

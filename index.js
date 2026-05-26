@@ -11,6 +11,9 @@ const productionApi =
 const jiraCommentsApi =
   process.env.N8N_JIRA_COMMENTS_API ||
   "https://n8n.tarchunk.win/webhook/jira-comments";
+const jiraStatusApi =
+  process.env.N8N_JIRA_STATUS_API ||
+  "https://n8n.tarchunk.win/webhook/jira-status";
 
 const client = new Client({
   intents: [
@@ -117,6 +120,47 @@ client.on("interactionCreate", async (interaction) => {
       }
     } catch (err) {
       console.error("jira-comments error:", err);
+      await interaction.editReply(`❌ เกิดข้อผิดพลาด: ${err.message}`);
+    }
+    return;
+  }
+
+  if (interaction.commandName === "jira-status") {
+    await interaction.deferReply({ ephemeral: true });
+    const status = interaction.options.getString("status");
+    const project = interaction.options.getString("project");
+
+    try {
+      const res = await fetch(jiraStatusApi, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          status,
+          project: project || undefined,
+          channelId: interaction.channelId,
+        }),
+      });
+
+      const text = await res.text();
+      let data = {};
+      try {
+        data = JSON.parse(text);
+      } catch {
+        data = { raw: text };
+      }
+
+      if (res.ok && data.success) {
+        const where = project ? ` ใน project \`${project}\`` : "";
+        await interaction.editReply(
+          `✅ ค้นหา status **${status}**${where} เสร็จแล้ว — เจอ ${data.issueCount} รายการ (โพสต์ใน channel นี้)`
+        );
+      } else {
+        await interaction.editReply(
+          `❌ ค้นหาไม่สำเร็จ: ${data.error || `HTTP ${res.status}`}`
+        );
+      }
+    } catch (err) {
+      console.error("jira-status error:", err);
       await interaction.editReply(`❌ เกิดข้อผิดพลาด: ${err.message}`);
     }
     return;
