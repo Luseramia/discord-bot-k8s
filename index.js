@@ -19,7 +19,6 @@ const client = new Client({
     GatewayIntentBits.MessageContent,
   ],
 });
-
 process.on("SIGTERM", () => {
   console.log("SIGTERM received, shutting down gracefully");
   client.destroy();
