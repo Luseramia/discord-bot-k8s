@@ -21,3 +21,4 @@ ENV NODE_ENV=production
 
 # คำสั่งเริ่มรัน bot
 CMD [ "node", "index.js" ]
+
