@@ -1,5 +1,5 @@
 # Base image ใช้ Node.js เวอร์ชัน LTS
-FROM node:lts-alpine3.22
+FROM node:alpine3.24
 
 # ตั้ง working directory
 WORKDIR /usr/src/app
